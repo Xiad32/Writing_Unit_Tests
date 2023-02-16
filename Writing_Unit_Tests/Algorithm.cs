@@ -24,7 +24,7 @@ namespace CodingStandardPractice
             {
                 sample[i] = sample[i] / (samples_collected + 1);
                 average[i] = average[i] * samples_collected;
-                res[i] = (sample[i] + average[i]) * (samples_collected + 1);
+                res[i] = (sample[i] + average[i]) / (samples_collected + 1);
             }
 
             res[0] = samples_collected + 1; 
