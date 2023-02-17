@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodingStandardPractice
+namespace Writing_Unit_Tests
 {
-    internal class Algorithm
+    public class Algorithm
     {
         // This method takes two arrays, an average array, and a new sample array
         // The new sample is divided by the number of samples collected so far

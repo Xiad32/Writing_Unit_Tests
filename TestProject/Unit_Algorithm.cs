@@ -1,6 +1,6 @@
-using Writing_Unit_Tests.algorithm;
+using Writing_Unit_Tests;
 
-namespace Writing_Unit_Tests.Tests
+namespace Unit_Tests.Tests
 {
     public class Tests
     {
@@ -10,45 +10,30 @@ namespace Writing_Unit_Tests.Tests
         }
 
         [Test]
-        public void Test_Empty_Arrays()
+        [TestCase(new float[0], new float[0])]
+        [TestCase(new float[] {1}, new float[] { 1 })]
+        [TestCase(new float[] { 1, 1, 1 }, new float[] { 1, 2 })]
+        public void Test_Input_Structure_Exceptions(float[] average, float[] sample)
         {
-            double[] average = new double[0];
-            double[] sample = new double[0];
-            Assert.Throws(algorithm.AccumilateArrays(average, sample));
-        }
-
-        [Test]
-        public void Test_Single_Value_Array()
-        {
-            double[] average = { 1 };
-            double[] sample = { 1 };
-            Assert.Throws(algorithm.AccumilateArrays(average, sample));
+            Assert.Throws<Exception>(() => Algorithm.AccumilateArrays(average, sample));
         }
 
 
         [Test]
-        public void Test_Negative_Sample_Count()
+        [TestCase(new float[] { -1, 1 }, new float[] { 1, 2 })]
+        [TestCase(new float[] { (float)-1.5, 1 }, new float[] { 1, 2 })]
+        public void Test_Invalid_Samples_Count(float[] average, float[] sample)
         {
-            double[] average = { -1, 1 };
-            double[] sample = { 1, 2 };
-            Assert.Throws(algorithm.AccumilateArrays(average, sample));
-        }
-
-        [Test]
-        public void Test_Real_Number_Sample_Count()
-        {
-            double[] average = { -1.5, 1 };
-            double[] sample = { 1, 2 };
-            Assert.Throws(algorithm.AccumilateArrays(average, sample));
+            Assert.Throws<Exception>(() => Algorithm.AccumilateArrays(average, sample));
         }
 
         [Test]
         public void Test_Valid_Arrays()
         {
-            double[] average = { 2, 1 };
-            double[] sample = { 1, 4 };
-            double[] result = { 3, 2 };
-            Assert.Equals(algorithm.AccumilateArrays(average, sample), result);
+            float[] average = { 2, 1 };
+            float[] sample = { 1, 4 };
+            float[] result = { 3, 1.11111116f };
+            Assert.That(result, Is.EqualTo(Algorithm.AccumilateArrays(average, sample)));
         }
     }
 }
